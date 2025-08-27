@@ -1,5 +1,5 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://{id}:{pw}@seatever.scgkpqx.mongodb.net/
+      uri: mongodb+srv://seatEver0826:seatEver0826@seatever.scgkpqx.mongodb.net/
       database: testdb
