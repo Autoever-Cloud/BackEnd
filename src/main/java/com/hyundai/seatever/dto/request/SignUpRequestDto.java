@@ -11,14 +11,14 @@ public class SignUpRequestDto {
     private String email;
     private String password;
     private String name;
-    private String phoneNumber;
+    private String contact; // 명세서에 맞게 phoneNumber -> contact로 변경
 
     public User toEntity(PasswordEncoder passwordEncoder) {
         return User.builder()
                 .email(this.email)
                 .password(passwordEncoder.encode(this.password)) // 비밀번호 암호화
                 .name(this.name)
-                .phoneNumber(this.phoneNumber)
+                .contact(this.contact)
                 .build();
     }
 }
