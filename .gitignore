@@ -1,6 +1,9 @@
 HELP.md
+application-secret.yaml
+
 .gradle
 build/
+!build/.gitkeep
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -26,6 +29,9 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+### log
+*.log
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -35,3 +41,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
