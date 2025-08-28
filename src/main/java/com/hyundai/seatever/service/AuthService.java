@@ -49,7 +49,7 @@ public class AuthService {
             TokenDto tokenDto = jwtTokenProvider.generateTokenDto(authentication);
 
             // 4. 사용자 정보 조회
-            User user = userRepository.findByEmail(loginRequestDto.getEmail())
+            User user = userRepository.findByEmail(authentication.getName())
                     .orElseThrow(() -> new CustomException(ErrorCode.LOGIN_FAILED));
 
             // 5. 명세서에 맞는 응답 객체(LoginResponseDto)를 생성하여 반환
