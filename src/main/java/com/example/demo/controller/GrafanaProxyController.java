@@ -59,6 +59,7 @@ public class GrafanaProxyController {
 	 * css, api 전부 자동 프록시됨 - 이거 없으면 iframe 내부에서 /api/search, /api/user/orgs 등 전부 404
 	 * 남
 	 */
+	// TEST
 	@GetMapping("/**")
 	public ResponseEntity<byte[]> proxyAll(HttpServletRequest request) {
 		String path = request.getRequestURI().replace("/api/grafana", "");
