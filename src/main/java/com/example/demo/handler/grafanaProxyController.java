@@ -1,6 +1,7 @@
-package com.example.demo.controller;
+package com.example.demo.handler;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.Properties;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,14 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/api/grafana")
-public class GrafanaProxyController {
-
-	//dsss
-	@Value("${grafana.url}")
+public class grafanaProxyController {
 	private String grafanaUrl;
-
-	@Value("${grafana.token}")
 	private String grafanaToken;
+
+	Properties props = new Properties();
+	String filePath = "src/main/resources/application.properties";
 
 	private final RestTemplate restTemplate = new RestTemplate();
 
@@ -33,6 +32,8 @@ public class GrafanaProxyController {
 	 */
 	@GetMapping("/dashboard/{uid}")
 	public ResponseEntity<String> getDashboard(@PathVariable String uid) {
+		grafanaUrl = props.getProperty("grafana.url");
+		grafanaToken = props.getProperty("grafana.token");
 		String targetUrl = grafanaUrl + "/api/dashboards/uid/" + uid;
 
 		HttpHeaders headers = new HttpHeaders();
@@ -60,7 +61,6 @@ public class GrafanaProxyController {
 	 * css, api 전부 자동 프록시됨 - 이거 없으면 iframe 내부에서 /api/search, /api/user/orgs 등 전부 404
 	 * 남
 	 */
-	// TEST
 	@GetMapping("/**")
 	public ResponseEntity<byte[]> proxyAll(HttpServletRequest request) {
 		String path = request.getRequestURI().replace("/api/grafana", "");
