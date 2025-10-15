@@ -27,9 +27,6 @@ public class grafanaProxyController {
 
 	private final RestTemplate restTemplate = new RestTemplate();
 
-	/**
-	 * ✅ 1) Grafana 대시보드 정보 조회 API (React에서 JSON 데이터 받을 때 사용) - 필요 없으면 삭제해도 됨
-	 */
 	@GetMapping("/dashboard/{uid}")
 	public ResponseEntity<String> getDashboard(@PathVariable String uid) {
 		grafanaUrl = props.getProperty("grafana.url");
@@ -47,20 +44,12 @@ public class grafanaProxyController {
 		return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
 	}
 
-	/**
-	 * ✅ 2) iframe URL 직접 생성 (React에서 URL만 받아서 iframe src에 쓰고 싶을 때)
-	 */
 	@GetMapping("/embed/{uid}")
 	public ResponseEntity<String> getEmbedUrl(@PathVariable String uid) {
 		String embedUrl = grafanaUrl + "/d/" + uid + "/f09f9a80-solog-metric-dashboard?orgId=1&from=now-15m&to=now";
 		return ResponseEntity.ok(embedUrl);
 	}
 
-	/**
-	 * ✅ 3) 프록시 전용: /api/grafana/** 로 들어오는 모든 요청을 Grafana로 전달 - 이게 핵심! static, js,
-	 * css, api 전부 자동 프록시됨 - 이거 없으면 iframe 내부에서 /api/search, /api/user/orgs 등 전부 404
-	 * 남
-	 */
 	@GetMapping("/**")
 	public ResponseEntity<byte[]> proxyAll(HttpServletRequest request) {
 		String path = request.getRequestURI().replace("/api/grafana", "");

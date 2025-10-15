@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.LLM.requestLLM;
 import com.example.demo.dto.sologDTO;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class sologController {
-	public requestLLM requestLLM;
+//	public requestLLM requestLLM;
 
 	@PostMapping("/api/solog")
 	public Map<String, String> handleSologMessage(@RequestBody sologDTO message) {
