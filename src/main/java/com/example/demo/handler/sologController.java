@@ -19,7 +19,7 @@ public class sologController {
 		System.out.println("React에서 받은 메시지: " + message);
 		String userPrompt = message.getPrompt();
 		try {
-			String responseLLM = requestLLM.callGeminiApi(userPrompt);
+			String responseLLM = requestLLM.callGptApi(userPrompt);
 
 			return Map.of("response", responseLLM);
 		} catch (Exception e) {
