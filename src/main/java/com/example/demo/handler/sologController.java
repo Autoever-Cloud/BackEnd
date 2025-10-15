@@ -13,14 +13,14 @@ import com.example.demo.dto.sologDTO;
 @RestController
 @CrossOrigin(origins = "*")
 public class sologController {
-//	public requestLLM requestLLM;
+	public requestLLM requestLLM;
 
 	@PostMapping("/api/solog")
 	public Map<String, String> handleSologMessage(@RequestBody sologDTO message) {
 		System.out.println("React에서 받은 메시지: " + message);
 		String userPrompt = message.getPrompt();
 		try {
-			String responseLLM = requestLLM.callGeminiApi(userPrompt);
+			String responseLLM = requestLLM.callGptApi(userPrompt);
 
 			return Map.of("response", responseLLM);
 		} catch (Exception e) {
