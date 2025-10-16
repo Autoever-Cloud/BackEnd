@@ -4,7 +4,7 @@ name: Deploy to Amazon EC2 with Docker Hub
 on:
  push:
    branches:
-     - main
+     - master
 # 환경 변수 설정
 env:
  DOCKERHUB_REPO: solog-backend # Docker Hub 리포지토리 이름
