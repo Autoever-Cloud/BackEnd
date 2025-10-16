@@ -11,9 +11,14 @@ import com.example.demo.LLM.requestLLM;
 import com.example.demo.dto.sologDTO;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowCredentials = "true")
 public class sologController {
-	public requestLLM requestLLM;
+
+	private final requestLLM requestLLM;
+
+	public sologController(requestLLM requestLLM) {
+		this.requestLLM = requestLLM;
+	}
 
 	@PostMapping("/api/solog")
 	public Map<String, String> handleSologMessage(@RequestBody sologDTO message) {
@@ -30,6 +35,7 @@ public class sologController {
 			return Map.of("status", "error");
 		}
 	}
+
 	@PostMapping("/api/solog/chatbot")
 	public Map<String, String> handleSologChatbot(@RequestBody sologDTO message) {
 		System.out.println("React에서 받은 메시지: " + message);

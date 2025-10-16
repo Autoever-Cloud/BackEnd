@@ -1,11 +1,11 @@
 package com.example.demo.handler;
 
-import java.util.Properties;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,20 +17,25 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RequestMapping("/api/grafana")
 public class grafanaProxyController {
+
+	@Value("${grafana.url}")
 	private String grafanaUrl;
+
+	@Value("${grafana.token}")
 	private String grafanaToken;
 
-	Properties props = new Properties();
-	String filePath = "src/main/resources/application.properties";
+//	Properties props = new Properties();
+//	String filePath = "src/main/resources/application.properties";
 
 	private final RestTemplate restTemplate = new RestTemplate();
 
 	@GetMapping("/dashboard/{uid}")
 	public ResponseEntity<String> getDashboard(@PathVariable String uid) {
-		grafanaUrl = props.getProperty("grafana.url");
-		grafanaToken = props.getProperty("grafana.token");
+//		grafanaUrl = props.getProperty("grafana.url");
+//		grafanaToken = props.getProperty("grafana.token");
 		String targetUrl = grafanaUrl + "/api/dashboards/uid/" + uid;
 
 		HttpHeaders headers = new HttpHeaders();

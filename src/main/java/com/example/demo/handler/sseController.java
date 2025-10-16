@@ -1,13 +1,8 @@
 package com.example.demo.handler;
 
-import java.util.Map;
-
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -34,17 +29,17 @@ public class sseController {
 		return sseService.createEmitter();
 	}
 
-	@PostMapping("/api/log")
-	public ResponseEntity<Void> sendLog(@RequestBody String payload) {
-		// "log" 라는 키로 들어온 메시지를 꺼내서 모든 클라이언트에게 전송
-		String logMessage = payload;
-
-		if (logMessage != null && !logMessage.isEmpty()) {
-			sseService.sendLogToClients(logMessage); // 이전에 만든 SseService의 메소드 호출
-			System.out.println("Log sent via API: " + logMessage);
-			return ResponseEntity.ok().build();
-		} else {
-			return ResponseEntity.badRequest().build(); // log 내용이 없으면 400 에러
-		}
-	}
+//	@PostMapping("/api/log")
+//	public ResponseEntity<Void> sendLog(@RequestBody String payload) {
+//		// "log" 라는 키로 들어온 메시지를 꺼내서 모든 클라이언트에게 전송
+//		String logMessage = payload;
+//
+//		if (logMessage != null && !logMessage.isEmpty()) {
+//			sseService.sendLogToClients(logMessage); // 이전에 만든 SseService의 메소드 호출
+//			System.out.println("Log sent via API: " + logMessage);
+//			return ResponseEntity.ok().build();
+//		} else {
+//			return ResponseEntity.badRequest().build(); // log 내용이 없으면 400 에러
+//		}
+//	}
 }

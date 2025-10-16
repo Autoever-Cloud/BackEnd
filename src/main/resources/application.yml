@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Solog-Backend
+
+
+openai:
+  api:
+    key: ${OPENAI_API_KEY}
+    url: ${OPENAI_API_URL}
+
+
+grafana:
+  url: ${GRAFANA_URL}
+  token: ${GRAFANA_TOKEN}

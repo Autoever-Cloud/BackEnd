@@ -1,15 +1,21 @@
 package com.example.demo.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.google.gson.Gson;
+
 @Service
 public class sseService {
 
+	private final AtomicLong eventIdCounter = new AtomicLong(1);
 	// 동시성 문제를 해결하기 위해 CopyOnWriteArrayList를 사용합니다.
 	private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
@@ -49,13 +55,20 @@ public class sseService {
 	 * 
 	 * @param logData 전송할 로그 데이터
 	 */
-	public void sendLogToClients(String logData) {
+	public void sendLogToClients(String subjectString, String messageString) {
 		// 현재 연결된 모든 클라이언트에게 로그 데이터를 전송합니다.
+		long newId = eventIdCounter.incrementAndGet();
 		for (SseEmitter emitter : this.emitters) {
 			try {
+				Gson gson = new Gson();
+				Map<String, Object> jsonMap = new HashMap<>();
+				jsonMap.put("id", newId);
+				jsonMap.put("subject", subjectString);
+				jsonMap.put("message", messageString);
 
-				// "log"라는 이름의 이벤트를 전송합니다.
-				emitter.send(SseEmitter.event().name("log").data(logData));
+				String jsonResult = gson.toJson(jsonMap);
+
+				emitter.send(SseEmitter.event().name("log").data(jsonResult));
 			} catch (IOException e) {
 				// 클라이언트와의 연결이 끊겼을 경우의 예외 처리
 				System.err.println("Error sending log to client: " + e.getMessage());
