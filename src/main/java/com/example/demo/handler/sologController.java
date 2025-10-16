@@ -2,6 +2,7 @@ package com.example.demo.handler;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ public class sologController {
 
 	private final requestLLM requestLLM;
 
+	@Autowired
 	public sologController(requestLLM requestLLM) {
 		this.requestLLM = requestLLM;
 	}
