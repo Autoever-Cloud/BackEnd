@@ -32,7 +32,6 @@ public class sologController {
 
 			return Map.of("response", responseLLM);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Map.of("status", "error");
 		}
