@@ -9,12 +9,14 @@ import java.net.http.HttpResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+@Service
 public class requestLLM {
 	@Value("${openai.api.key}")
 	private String apiKey;
@@ -22,7 +24,7 @@ public class requestLLM {
 	@Value("${openai.api.url}")
 	private String apiUrl;
 
-	public  String callGptApi(String userPrompt, String type) throws Exception {
+	public String callGptApi(String userPrompt, String type) throws Exception {
 //		ClassPathResource resource = new ClassPathResource("application.properties");
 //		String apiKey = null;
 //		String apiUrl = null;
@@ -238,13 +240,13 @@ public class requestLLM {
 				.header("Content-Type", "application/json").header("Authorization", "Bearer " + apiKey)
 				.POST(HttpRequest.BodyPublishers.ofString(jsonBody)).build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() == 200) {
-            JsonNode rootNode = objectMapper.readTree(response.body());
-            return rootNode.path("choices").get(0).path("message").path("content").asText();
-        } else {
-            throw new RuntimeException("API 호출 실패: " + response.statusCode() + " " + response.body());
-        }
-    }
+		if (response.statusCode() == 200) {
+			JsonNode rootNode = objectMapper.readTree(response.body());
+			return rootNode.path("choices").get(0).path("message").path("content").asText();
+		} else {
+			throw new RuntimeException("API 호출 실패: " + response.statusCode() + " " + response.body());
+		}
+	}
 }
