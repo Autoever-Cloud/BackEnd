@@ -12,7 +12,7 @@ import com.example.demo.LLM.requestLLM;
 import com.example.demo.dto.sologDTO;
 
 @RestController
-@CrossOrigin(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class sologController {
 
 	private final requestLLM requestLLM;
