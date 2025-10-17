@@ -27,15 +27,11 @@ public class grafanaProxyController {
 	@Value("${grafana.token}")
 	private String grafanaToken;
 
-//	Properties props = new Properties();!!
-//	String filePath = "src/main/resources/application.properties";
 
 	private final RestTemplate restTemplate = new RestTemplate();
 
 	@GetMapping("/dashboard/{uid}")
 	public ResponseEntity<String> getDashboard(@PathVariable String uid) {
-//		grafanaUrl = props.getProperty("grafana.url");
-//		grafanaToken = props.getProperty("grafana.token");
 		String targetUrl = grafanaUrl + "/api/dashboards/uid/" + uid;
 
 		HttpHeaders headers = new HttpHeaders();
@@ -51,7 +47,7 @@ public class grafanaProxyController {
 
 	@GetMapping("/embed/{uid}")
 	public ResponseEntity<String> getEmbedUrl(@PathVariable String uid) {
-		String embedUrl = grafanaUrl + "/d/" + uid + "/f09f9a80-solog-metric-dashboard?orgId=1&from=now-15m&to=now";
+		String embedUrl = grafanaUrl + "/d/" + uid + "/f09f9a80-solog-metric-dashboard?orgId=1&from=now-15m&to=now&refresh=auto";
 		return ResponseEntity.ok(embedUrl);
 	}
 

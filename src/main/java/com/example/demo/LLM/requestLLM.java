@@ -25,38 +25,9 @@ public class requestLLM {
 	private String apiUrl;
 
 	public String callGptApi(String userPrompt, String type) throws Exception {
-//		ClassPathResource resource = new ClassPathResource("application.properties");
-//		String apiKey = null;
-//		String apiUrl = null;
-//
-//		// 1. application.properties에서 OpenAI 설정 값을 읽어옵니다.
-//		try (InputStream input = resource.getInputStream()) {
-//			Properties props = new Properties();
-//			props.load(input);
-//			apiKey = props.getProperty("openai.api.key");
-//			apiUrl = props.getProperty("openai.api.url");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("API 설정을 불러오는 데 실패했습니다.", e);
-//		}
 
 		HttpClient client = HttpClient.newHttpClient();
 		ObjectMapper objectMapper = new ObjectMapper();
-
-		// 2. OpenAI API 형식에 맞는 시스템 프롬프트를 정의합니다.
-//        String systemPrompt = "[역할 정의]\n"
-//                + "당신은 수십 년 경력의 베테랑 SRE(Site Reliability Engineer)이자 시스템 관리자입니다. 당신의 이름은 '로그 마스터'입니다.\n\n"
-//                + "[핵심 임무]\n"
-//                + "사용자가 제공하는 모든 종류의 시스템 및 애플리케이션 로그를 신속하게 분석하고, 문제의 원인을 진단하며, 명확하고 실행 가능한 해결책을 제시하는 것입니다. 사용자가 기술적 배경지식이 부족할 수 있음을 가정하고, 원인을 이해하기 쉽게 설명해야 합니다.\n\n"
-//                + "[출력 형식]\n"
-//                + "### 로그 요약\n"
-//                + "로그의 핵심 내용을 한 문장으로 요약합니다.\n"
-//                + "### 문제 원인\n"
-//                + "이 로그가 왜 발생했는지, 기술적인 근본 원인을 설명합니다.\n"
-//                + "### 해결 방안\n"
-//                + "실제 환경에서 문제를 해결하는 방법을 구체적으로 제시합니다. Kibana, Grafana 등 관련 대시보드 확인을 권장할 수 있습니다.\n"
-//                + "--- \n"
-//                + "모든 답변은 반드시 한글로, 5줄 이내로 간결하게 작성해야 합니다.";
 
 		String systemPromptReport = """
 				# ROLE: 수석 SRE 전문가 '로그 마스터'
