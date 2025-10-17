@@ -27,7 +27,7 @@ public class grafanaProxyController {
 	@Value("${grafana.token}")
 	private String grafanaToken;
 
-//	Properties props = new Properties();
+//	Properties props = new Properties();!!
 //	String filePath = "src/main/resources/application.properties";
 
 	private final RestTemplate restTemplate = new RestTemplate();
