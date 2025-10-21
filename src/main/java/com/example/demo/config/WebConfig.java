@@ -35,7 +35,10 @@ public class WebConfig {
                         .maxAge(3600);
                 
                 registry.addMapping("/api/connect") 
-                        .allowedOrigins("/**")
+                        .allowedOrigins(
+                            "http://localhost:3000",
+                            "http://13.209.98.128:3000"
+                        )
                         .allowedMethods("GET", "OPTIONS") 
                         .allowedHeaders("*")
                         .allowCredentials(false) 
