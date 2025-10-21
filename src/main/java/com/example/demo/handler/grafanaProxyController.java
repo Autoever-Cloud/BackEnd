@@ -45,7 +45,7 @@ public class grafanaProxyController {
 	@GetMapping("/embed/{uid}")
 	public ResponseEntity<String> getEmbedUrl(@PathVariable String uid) {
 		String embedUrl = grafanaUrl + "/d/" + uid
-				+ "/f09f9a80-solog-metric-dashboard?orgId=1&from=now-15m&to=now&refresh=auto";
+				+ "/f09f9a80-solog-metric-dashboard?orgId=1&from=now-15m&to=now&refresh=auto&theme=light";
 		return ResponseEntity.ok(embedUrl);
 	}
 
