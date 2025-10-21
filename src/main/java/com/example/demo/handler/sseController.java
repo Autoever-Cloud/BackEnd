@@ -8,7 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.example.demo.service.sseService;
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class sseController {
 
 	private final sseService sseService;
