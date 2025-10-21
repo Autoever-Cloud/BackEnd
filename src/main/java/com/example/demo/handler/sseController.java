@@ -1,7 +1,6 @@
 package com.example.demo.handler;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -9,7 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.example.demo.service.sseService;
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("/**")
 public class sseController {
 
 	private final sseService sseService;

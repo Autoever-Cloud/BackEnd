@@ -5,7 +5,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RequestMapping("/api/grafana")
 public class grafanaProxyController {
 
@@ -26,7 +25,6 @@ public class grafanaProxyController {
 
 	@Value("${grafana.token}")
 	private String grafanaToken;
-
 
 	private final RestTemplate restTemplate = new RestTemplate();
 
@@ -47,7 +45,8 @@ public class grafanaProxyController {
 
 	@GetMapping("/embed/{uid}")
 	public ResponseEntity<String> getEmbedUrl(@PathVariable String uid) {
-		String embedUrl = grafanaUrl + "/d/" + uid + "/f09f9a80-solog-metric-dashboard?orgId=1&from=now-15m&to=now&refresh=auto";
+		String embedUrl = grafanaUrl + "/d/" + uid
+				+ "/f09f9a80-solog-metric-dashboard?orgId=1&from=now-15m&to=now&refresh=auto";
 		return ResponseEntity.ok(embedUrl);
 	}
 
