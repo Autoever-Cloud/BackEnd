@@ -3,7 +3,6 @@ package com.example.demo.handler;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +11,6 @@ import com.example.demo.LLM.requestLLM;
 import com.example.demo.dto.sologDTO;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class sologController {
 
 	private final requestLLM requestLLM;
@@ -47,7 +45,6 @@ public class sologController {
 
 			return Map.of("response", responseLLM);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Map.of("status", "error");
 		}
