@@ -19,7 +19,7 @@ COPY src src
 RUN ./gradlew build -x test
 
 
-FROM openjdk:21-slim
+FROM openjdk:21-jdk-slim
 
 
 VOLUME /tmp
